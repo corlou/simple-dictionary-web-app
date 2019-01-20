@@ -17,48 +17,6 @@
       <button onclick="search()">Go</button>
 
       <ul id="word_list">
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
-        <li>apple</li>
-        <li>ball</li>
-        <li>banana</li>
       </ul>
     </div>
 
@@ -75,3 +33,57 @@
   </div>
 </body>
 </html>
+
+<script type="text/javascript">
+  var dictionary = [
+    {
+      word:"apple",
+      def: "A round fruit with seeds at it's center",
+      rel: ["mango", "pear", "guava"],
+    },
+    {
+      word:"castle",
+      def: "a dwelling of the royal family",
+      rel: ["fortress", "citadel", "palace"],
+    },
+    {
+      word:"car",
+      def: "transports people from place to place",
+      rel: ["bus", "bicycle", "truck"],
+    }, 
+    {
+      word:"computer",
+      def: "an electronic device",
+      rel: ["laptop", "tablet"],
+    },
+    {
+      word:"mosquito",
+      def: "an insect",
+      rel: ["ant", "beetle", "butterfly"],
+    }
+  ];
+  
+  //Fill the dictionary with words
+  init = function() {
+    for (var i = 0; i < dictionary.length; i++) {
+      document.getElementById('word_list').innerHTML += "<li onclick='show("+ i +")'>" + dictionary[i].word + "</li>";
+    }
+  }
+
+  //Call the innit function when the page loads
+  init();
+
+  //Display a word, its definition, andrelated words
+  show = function(i) {
+    document.getElementById('word_text').innerHTML = dictionary[i].word;
+    document.getElementById('definition').innerHTML = dictionary[i].definition;
+
+    var list = "";
+
+    for (var j = 0; j < dictionary[i].rel.length; j++) {
+      list += dictionary[i].rel[j];
+      document.getElementById('related').innerHTML = list;
+    }
+  }
+</script>
+
