@@ -21,13 +21,13 @@
     </div>
 
       <div class="word">
-        <h3 id="word_text">Word</h3>
-        <p id="definition">The definition of the word goes here</p>
+        <h3 id="word_text"></h3>
+        <p id="definition"></p>
 
         <hr>
 
         <h3>Related Words:</h3>
-          <li id="related">relatedWord</li>
+          <li id="related"></li>
 
       </div>
   </div>
@@ -37,30 +37,85 @@
 <script type="text/javascript">
   var dictionary = [
     {
-      word:"apple",
+      word:"Accumulate",
+      def: "collect",
+      rel: ["gather", "amass"],
+    }, 
+    {
+      word:"Apple",
       def: "A round fruit with seeds at it's center",
       rel: ["mango", "pear", "guava"],
     },
     {
-      word:"castle",
-      def: "a dwelling of the royal family",
-      rel: ["fortress", "citadel", "palace"],
+      word:"Asinine",
+      def: "devoid of intelligence",
+      rel: ["stupid", "dumb"],
     },
     {
-      word:"car",
-      def: "transports people from place to place",
-      rel: ["bus", "bicycle", "truck"],
+      word:"Benevolent",
+      def: "showing or motivated by sympathy and understanding and generosity",
+      rel: ["generous", "charitable"],
+    },
+    {
+      word:"Bumfuzzle",
+      def: "being confused",
+      rel: ["confused", "perplexed"],
+    },
+    {
+      word:"Caffeine",
+      def: "A special brew that transforms any dev into a hard-working employee",
+      rel: ["coffee", "energy"],
+    },
+    {
+      word:"Cat",
+      def: "affectionate pet until one too many belly scratches",
+      rel: ["kitty", "da-khitty", "bean-owner"],
     }, 
     {
-      word:"computer",
-      def: "an electronic device",
-      rel: ["laptop", "tablet"],
+      word:"Flibbertigibbet",
+      def: "someone who is silly and who talks incessantly",
+      rel: ["birdbrain", "cuckoo", "ditz,"],
     },
     {
-      word:"mosquito",
-      def: "an insect",
-      rel: ["ant", "beetle", "butterfly"],
-    }
+      word:"Framework",
+      def: "the initial structure",
+      rel: ["react", "angular", "django"],
+    },
+    {
+      word:"Hone",
+      def: "to sharpen",
+      rel: ["practice", "whet", "file"],
+    },
+    {
+      word:"Laud",
+      def: "giving praise",
+      rel: ["applaud", "commend"],
+    },
+    {
+      word:"Pandiculation",
+      def: "yawning and stretching upon waking up",
+      rel: ["stretch", "yawn"],
+    },
+    {
+      word:"Seasoned",
+      def: "a person who has been around forever, doing what they do, and doing it well ",
+      rel: ["experienced", "knowledge"],
+    }, 
+    {
+      word:"Strategy",
+      def: "a plan to achieve a goal",
+      rel: ["game-plan", "procedure"],
+    },
+    {
+      word:"Transition",
+      def: "the act of passing from one state or place to the next",
+      rel: ["transformation", "metamorphosis"],
+    },
+    {
+      word:"Wabbit",
+      def: "Scottish term for being tired",
+      rel: ["sleepy", "tired", "exhausted"],
+    },
   ];
   
   //Fill the dictionary with words
@@ -73,16 +128,43 @@
   //Call the innit function when the page loads
   init();
 
-  //Display a word, its definition, andrelated words
-  show = function(i) {
+  //Display a word, its definition, and related words
+  show = function(i){
     document.getElementById('word_text').innerHTML = dictionary[i].word;
-    document.getElementById('definition').innerHTML = dictionary[i].definition;
+    document.getElementById('definition').innerHTML = dictionary[i].def;
 
     var list = "";
 
     for (var j = 0; j < dictionary[i].rel.length; j++) {
-      list += dictionary[i].rel[j];
+      list += "<li>" + dictionary[i].rel[j] + "</li>";
       document.getElementById('related').innerHTML = list;
+    }
+  }
+
+  //Show first word in the dictionary when page loads
+  show(0);
+
+  //Search functionality
+  search = function() {
+    query = document.getElementById('search').value;
+
+    if (query == "") {
+      return;
+    }
+    found = -1; //Initialize found to false
+
+    for (var i = 0; i < dictionary.length; i++) {
+      if (query == dictionary[i].word) {
+        found = i;
+        break;
+      }else {
+        document.getElementById('word_text').innerHTML = "Word not found";
+        document.getElementById('definition').innerHTML = "The word you entered is not found in our dictionary";
+        document.getElementById('related').innerHTML = "No related words";
+      }
+    }
+    if (found >= 0) {
+      show(found);
     }
   }
 </script>
